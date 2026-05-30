@@ -50,6 +50,13 @@ function ModuleAccordion({ m, open, onToggle, idx }) {
   );
 }
 
+const QUICK_FACTS = [
+  { l: "Fechas", v: "Mayo–Julio 2026" },
+  { l: "Sede", v: "Cochabamba, Bolivia" },
+  { l: "Cupos", v: "Máximo 40" },
+  { l: "Modalidad", v: "Presencial + Virtual" },
+];
+
 export default function ConvocatoriaPage() {
   useReveal();
   const [open, setOpen] = useState(0);
@@ -70,11 +77,33 @@ export default function ConvocatoriaPage() {
           <Link href="/postulacion" className="btn btn-primary btn-lg">
             Postula Ahora <span className="arr">→</span>
           </Link>
+          <Link href="/programa" className="btn btn-ghost btn-lg">
+            Ver el programa
+          </Link>
         </div>
       </PageHeader>
 
-      <section className="section" style={{ paddingTop: 0 }}>
+      {/* Quick-scan fact strip */}
+      <div className="factstrip">
         <div className="wrap">
+          <div className="factstrip-inner">
+            {QUICK_FACTS.map((f, i) => (
+              <div className="fs-item" key={i} data-reveal style={{ "--d": i * 50 + "ms" }}>
+                <span className="fs-label mono">{f.l}</span>
+                <strong className="fs-val">{f.v}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Requirements */}
+      <section className="section">
+        <div className="wrap">
+          <span className="kicker" data-reveal>Requisitos</span>
+          <h2 className="h-xl" data-reveal style={{ "--d": "60ms", marginTop: 16, marginBottom: 40 }}>
+            ¿Quién puede postular?
+          </h2>
           <div className="convo-reqs">
             <div className="req" data-reveal>
               <span className="mono muted-3">01 · Edad</span>
@@ -100,6 +129,7 @@ export default function ConvocatoriaPage() {
         </div>
       </section>
 
+      {/* Schedule */}
       <section className="section cream">
         <div className="wrap">
           <div className="sched-intro">
@@ -135,6 +165,7 @@ export default function ConvocatoriaPage() {
         </div>
       </section>
 
+      {/* Steps */}
       <section className="section">
         <div className="wrap">
           <span className="kicker" data-reveal>
@@ -152,6 +183,12 @@ export default function ConvocatoriaPage() {
                 {i < data.steps.length - 1 && <span className="step-line" aria-hidden="true"></span>}
               </div>
             ))}
+          </div>
+          <div className="steps-cta" data-reveal>
+            <Link href="/postulacion" className="btn btn-primary btn-lg">
+              Completar postulación <span className="arr">→</span>
+            </Link>
+            <p className="steps-cta-note mono muted-3">Cupos limitados · Generación 2026</p>
           </div>
         </div>
       </section>
